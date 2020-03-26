@@ -39,13 +39,29 @@ export default class AirportApiService {
   }
 
   getAll = async (url) => {
-    const result = await this.getResource(`${url}`, {
+    return await this.getResource(`${url}`, {
       method: 'GET',
       headers: { 'Content-Type': 'text/plain;charset=UTF-8' }
     });
+  }
+
+  getById = async (url, id) => {
+    return await this.getResource(`${url}/${id}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'text/plain;charset=UTF-8' }
+    });
+  }
+
+  getAllUserRoles = async () => {
+    const result = await this.getAll('api/UserRole/Get');
 
     return result
       .map(this._transformToDictionary);
+  }
+
+  getAllUserRoleById = async (id) => {
+    const result = await this.getAll(`api/UserRole/Get/${id}`);
+    return result;
   }
 
   _transformToDictionary = (item) => {
