@@ -1,14 +1,6 @@
 import "./UserRole.sass";
 import React from "react";
-import { insertRow, saveCell, deleteRow } from '../common/operations';
-
-function template() {
-  return (
-    <div className="user-role">
-      <h1>UserRole</h1>
-    </div>
-  );
-};
+import { insertRow, saveCell, deleteRow } from '../../Services/operations';
 
 export function onInsertRow(model) {
     insertRow('UserRole/Post', { name: model.name })
@@ -35,5 +27,5 @@ export function onDeleteRow(rowKeys) {
 }
 
 
-export default {template, onDeleteRow, onInsertRow, onSaveCell};
+export default {onDeleteRow, onInsertRow, onSaveCell};
 

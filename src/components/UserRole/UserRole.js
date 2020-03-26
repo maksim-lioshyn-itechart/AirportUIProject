@@ -1,19 +1,52 @@
-import React, { Component }   from "react";
-import template from "./UserRole.jsx";
+import React, { Component } from "react";
+import Spinner from '../spinner';
+import AirportApiService from "../../Services/airport-api-service";
+
+const { getAll } = new AirportApiService();
 
 export default class UserRole extends Component {
+
+  state = {
+    loading: true,
+    userRoles: []
+  }
+
+  componentDidMount() {
+    this.intervalCoordinateId = getAll('api/UserRole/Get')
+      .then(response => {
+        this.setState({
+          userRoles: response,
+          loading: false,
+        })
+      });
+  }
+
   render() {
-    return template.call(this);
+    const { loading, userRoles } = this.state;
+
+    if (loading) {
+      return <Spinner />;
+    }
+
+    const listItems = userRoles.map((item) =>
+      <li key={item.id}>{item.name}</li>
+    );
+    console.log(userRoles)
+    return (
+      <div className="user-role">
+        <ul>{listItems}</ul>
+      </div>
+    );
   }
 }
 
 
 
-// import { url } from '../../config.js';
+// import { url } from '../../config.json';
 // import React from 'react';
 // import { BootstrapTable, TableHeaderColumn }
 //   from 'react-bootstrap-table'
-// import { onDeleteRow, onInsertRow, onSaveCell } from './Actions';
+// import { onDeleteRow, onInsertRow, onSaveCell } from './UserRole';
 
 // class UserRole extends React.Component {
 

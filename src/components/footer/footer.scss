@@ -1,0 +1,12 @@
+@import "../../index.scss";
+
+.footer {
+	$base-color: #BFF08E;
+	$height: 50px;
+
+	width: $common-width;
+	margin: -$height auto 0;
+	height: $height;
+	background: $base-color;
+	position: relative;
+}
